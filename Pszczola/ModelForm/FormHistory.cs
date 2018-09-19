@@ -19,15 +19,12 @@ namespace Pszczola
         public FormHistory()
         {
             InitializeComponent();
-
         }
 
         public FormHistory(int ulid, int rok)
         {
             InitializeComponent();
-
            _histUl = _zapytania.PobierzHistorie(ulid, rok);
-
             foreach(HistUl s in _histUl)
             {
                 listBox1.Items.Add("[" + s.Gdzie + "] " + "Zmiana z: " + s.ZmianaZ +" na: " + s.ZmianaNa + "  (" + s.Czas+")");

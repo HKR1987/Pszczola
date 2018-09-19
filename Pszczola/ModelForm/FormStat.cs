@@ -18,8 +18,7 @@ namespace Pszczola
         public FormStat()
         {
             InitializeComponent();
-            _ds = _polaczenie.ZapytanieZ($"SELECT data, sum(wagab) sum FROM miodobrania group by data");
-
+            _ds = _polaczenie.ZapytanieDataSet($"SELECT data, sum(wagab) sum FROM miodobrania group by data");
             foreach (DataRow s in _ds.Tables[0].Rows)
             {
                 chart1.Series["Miód"].Points.AddXY(s["data"].ToString(), s["sum"].ToString());

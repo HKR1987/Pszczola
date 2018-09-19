@@ -8,17 +8,14 @@ namespace Pszczola
     public class Polaczenie
     {
         private SQLiteConnection _dbConnection = new SQLiteConnection("Data Source=baza.sqlite;Version=3;");
-
         private SQLiteCommand _command;
 
-        public void ZapytanieB(string s)
+        public void ZapytanieVoid(string zapytanie)
         {
             try
             {
                 _dbConnection.Open();
-
-                _command = new SQLiteCommand(s, _dbConnection);
-
+                _command = new SQLiteCommand(zapytanie, _dbConnection);
                 _command.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -31,20 +28,15 @@ namespace Pszczola
             }
         }
 
-        public DataSet ZapytanieZ(string s)
+        public DataSet ZapytanieDataSet(string zapytanie)
         {
             DataSet ds = new DataSet();
 
             try
             {
                 _dbConnection.Open();
-
-                var da = new SQLiteDataAdapter(s, _dbConnection);
-
-                SQLiteCommand command = new SQLiteCommand(s, _dbConnection);
-
-
-
+                var da = new SQLiteDataAdapter(zapytanie, _dbConnection);
+                SQLiteCommand command = new SQLiteCommand(zapytanie, _dbConnection);
                 da.Fill(ds);
             }
             catch (System.Data.SQLite.SQLiteException e)

@@ -14,19 +14,15 @@ namespace Pszczola
     {
         private DataSet ds;
         Polaczenie polaczenie = new Polaczenie();
-
         public FormNotes()
         {
             InitializeComponent();
-
         }
 
         public FormNotes(int ulid, int rok)
         {
             InitializeComponent();
-
-            ds = polaczenie.ZapytanieZ($"SELECT opis, data FROM notatki where idul={ulid} and rok={rok}");
-
+            ds = polaczenie.ZapytanieDataSet($"SELECT opis, data FROM notatki where idul={ulid} and rok={rok}");
             foreach(DataRow s in ds.Tables[0].Rows)
             {
                 listBox1.Items.Add("[" + s["data"].ToString() + "] " + s["opis"].ToString());

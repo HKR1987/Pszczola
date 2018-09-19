@@ -40,7 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.t_pochM = new System.Windows.Forms.TextBox();
             this.b_zapisz = new System.Windows.Forms.Button();
-            this.l_id = new System.Windows.Forms.Label();
             this.b_historia = new System.Windows.Forms.Button();
             this.t_nowy = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,7 +48,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.t_dodajNot = new System.Windows.Forms.TextBox();
             this.b_dodajNotatke = new System.Windows.Forms.Button();
-            this.t_wagaramki = new System.Windows.Forms.TextBox();
             this.b_miodobrania = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -174,16 +172,6 @@
             this.b_zapisz.UseVisualStyleBackColor = true;
             this.b_zapisz.Click += new System.EventHandler(this.B_zapisz_Click);
             // 
-            // l_id
-            // 
-            this.l_id.AutoSize = true;
-            this.l_id.Location = new System.Drawing.Point(569, 15);
-            this.l_id.Name = "l_id";
-            this.l_id.Size = new System.Drawing.Size(64, 13);
-            this.l_id.TabIndex = 12;
-            this.l_id.Tag = "kontrolki";
-            this.l_id.Text = "Waga ramki";
-            // 
             // b_historia
             // 
             this.b_historia.Location = new System.Drawing.Point(607, 335);
@@ -260,14 +248,6 @@
             this.b_dodajNotatke.UseVisualStyleBackColor = true;
             this.b_dodajNotatke.Click += new System.EventHandler(this.B_dodajNotatke_Click);
             // 
-            // t_wagaramki
-            // 
-            this.t_wagaramki.Location = new System.Drawing.Point(639, 12);
-            this.t_wagaramki.Name = "t_wagaramki";
-            this.t_wagaramki.Size = new System.Drawing.Size(53, 20);
-            this.t_wagaramki.TabIndex = 4;
-            this.t_wagaramki.Tag = "kontrolki";
-            // 
             // b_miodobrania
             // 
             this.b_miodobrania.Location = new System.Drawing.Point(364, 335);
@@ -328,7 +308,6 @@
             this.ClientSize = new System.Drawing.Size(704, 370);
             this.Controls.Add(this.b_stat);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.t_wagaramki);
             this.Controls.Add(this.b_dodajNotatke);
             this.Controls.Add(this.t_dodajNot);
             this.Controls.Add(this.label5);
@@ -339,7 +318,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.t_nowy);
             this.Controls.Add(this.b_historia);
-            this.Controls.Add(this.l_id);
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.t_pochM);
             this.Controls.Add(this.label3);
@@ -372,7 +350,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox t_pochM;
         private System.Windows.Forms.Button b_zapisz;
-        private System.Windows.Forms.Label l_id;
         private System.Windows.Forms.Button b_historia;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox t_nowy;
@@ -382,7 +359,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox t_dodajNot;
         private System.Windows.Forms.Button b_dodajNotatke;
-        private System.Windows.Forms.TextBox t_wagaramki;
         private System.Windows.Forms.Button b_miodobrania;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label6;

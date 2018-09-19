@@ -7,6 +7,5 @@
         public string Nazwa { get; set; }
         public string PochodzenieMatki { get; set; }
         public string OznaczenieMatki { get; set; }
-        public string WagaRamki { get; set; }
     }
 }

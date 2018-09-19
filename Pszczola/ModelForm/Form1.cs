@@ -28,7 +28,6 @@ namespace Pszczola
             }
             
             OdswiezListe();
-
             KontrolkiHide();
         }
 
@@ -37,7 +36,6 @@ namespace Pszczola
             foreach (var k in this.Controls)
             {
                 var c = k as Control;
-
                 if ((string)c.Tag == "kontrolki")
                 {
                     c.Visible = false;
@@ -50,7 +48,6 @@ namespace Pszczola
             foreach (var k in this.Controls)
             {
                 var c = k as Control;
-
                 if ((string)c.Tag == "kontrolki")
                 {
                     c.Visible = true;
@@ -80,13 +77,11 @@ namespace Pszczola
             try
             {
                 dataGridView1.DataSource = Ds.Tables[0];
-            
                 dataGridView1.Columns[0].Visible = false;
 
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     dataGridView1.ClearSelection();
-
                     dataGridView1.Rows[Index].Selected = true;
                 }
 
@@ -94,9 +89,7 @@ namespace Pszczola
             catch (System.IndexOutOfRangeException)
             {
                 MessageBox.Show("Brak tabel. Zostaną one utworzone");
-
                 _zapytania.UtworzTabele();
-
                 OdswiezListe();
             }
         }
@@ -107,13 +100,9 @@ namespace Pszczola
             try
             {
                 SprawdzenieZmian();
-
                 Ulid = Int32.Parse(dataGridView1.SelectedCells[0].Value.ToString());
-
                 Ul = _zapytania.PobierzUl(Ulid);
-
                 GenerujDane(Ul, Ulid);
-
                 KontrolkiShow();
             }
             catch (ArgumentOutOfRangeException)
@@ -124,7 +113,7 @@ namespace Pszczola
 
         private void SprawdzenieZmian()
         {
-            if(Ul!=null && (t_nazwa.Text!=Ul.Nazwa || t_oznaczM.Text!=Ul.OznaczenieMatki || t_pochM.Text!=Ul.PochodzenieMatki || t_wagaramki.Text!=Ul.WagaRamki))
+            if(Ul!=null && (t_nazwa.Text!=Ul.Nazwa || t_oznaczM.Text!=Ul.OznaczenieMatki || t_pochM.Text!=Ul.PochodzenieMatki))
             {
                 DialogResult dialog = MessageBox.Show("Istnieją niezapisane dane.\nCzy chcesz je zapisać teraz?", "Informacja", MessageBoxButtons.YesNo);
                 if(dialog == DialogResult.Yes)
@@ -137,22 +126,15 @@ namespace Pszczola
         private void GenerujDane(Ul u, int id)
         {
             t_nazwa.Text = u.Nazwa;
-
             t_pochM.Text = u.PochodzenieMatki;
-
             t_oznaczM.Text = u.OznaczenieMatki;
-
-            t_wagaramki.Text = u.WagaRamki.ToString();
-
             OdswiezNotatki();
-
             OdswiezMiodobrania();
         }
 
         private void OdswiezNotatki()
         {
             listBox1.Items.Clear();
-
             Ds = _zapytania.PobierzNotatki(Ul.IdUla, Ul.Rok);
 
             foreach (DataRow s in Ds.Tables[0].Rows)
@@ -164,7 +146,6 @@ namespace Pszczola
         private void OdswiezMiodobrania()
         {
             listBox2.Items.Clear();
-
             Ds = _zapytania.PobierzMiodobrania(Ul.IdUla, Ul.Rok);
 
             foreach (DataRow s in Ds.Tables[0].Rows)
@@ -196,51 +177,39 @@ namespace Pszczola
                 Nazwa = t_nazwa.Text,
                 PochodzenieMatki = t_pochM.Text,
                 OznaczenieMatki = t_oznaczM.Text,
-                WagaRamki = t_wagaramki.Text.Replace(',','.')
-                
             };
+
             _zapytania.AktualizujUl(nowyUl);
-
             Ul = _zapytania.PobierzUl(Ulid);
-
             OdswiezListe();
         }
 
         private void B_historia_Click(object sender, EventArgs e)
         {
             Rok = Convert.ToInt32(comboBox1.Text);
-
             FormHistory hist = new FormHistory(Ulid, Rok);
-
             hist.ShowDialog();            
         }
 
         private void ComboBox1_TextChanged(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
-
             KontrolkiHide();
-
             OdswiezListe();
         }
 
         private void B_dodajNotatke_Click(object sender, EventArgs e)
         {
             _zapytania.DodajNotatke(t_dodajNot.Text, Ul.IdUla, Ul.Rok);
-
             t_dodajNot.Text = "";
-
             OdswiezNotatki();
-
             OdswiezMiodobrania();
         }
 
         private void B_notatki_Click(object sender, EventArgs e)
         {
             Rok = Convert.ToInt32(comboBox1.Text);
-
             FormNotes hist = new FormNotes(Ulid, Rok);
-
             hist.ShowDialog();
         }
 
@@ -257,7 +226,7 @@ namespace Pszczola
 
         private void Button1_Click_2(object sender, EventArgs e)
         {
-            FormMiodobranie f = new FormMiodobranie(Ul.IdUla, Ul.Rok, Ul.WagaRamki);
+            FormMiodobranie f = new FormMiodobranie(Ul.IdUla, Ul.Rok);
             f.ShowDialog();
             OdswiezMiodobrania();
         }

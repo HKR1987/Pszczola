@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pszczola.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,26 +15,38 @@ namespace Pszczola
     {
         private int _idUla;
         private int _rok;
-        private double _wagaRamki;
-        private Polaczenie _polaczenie = new Polaczenie();
+        private Zapytania _zapytania = new Zapytania();
 
         public FormMiodobranie()
         {
             InitializeComponent();
         }
 
-        public FormMiodobranie(int idUla, int rok, string wagaRamki)
+        public FormMiodobranie(int idUla, int rok)
         {
             InitializeComponent();
             _idUla = idUla;
             _rok = rok;
-            _wagaRamki = Double.Parse(wagaRamki);
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            double wagaNnetto = Double.Parse(t_waga.Text.Replace('.', ',')) - (Double.Parse(t_ramki.Text) * _wagaRamki);
-            _polaczenie.ZapytanieZ($"INSERT INTO miodobrania (idul, rok, data, nazwa, ramki, wagan, wagab, uwagi) VALUES ({_idUla}, {_rok}, '{dateTimePicker1.Value.ToShortDateString().ToString()}', '{t_nazwa.Text}', {t_ramki.Text}, {wagaNnetto.ToString().Replace(',', '.')}, {t_waga.Text.Replace(',', '.')}, '{t_uwagi.Text}')");
+            var brutto = Double.Parse(t_wagaRazem.Text);
+            var tara = Double.Parse(t_wagaTara.Text);
+            var netto = brutto - tara;
+
+            var miodobranie = new Miodobranie
+            {
+                IdUl = _idUla,
+                Rok = _rok,
+                Data = dateTimePicker1.Value.ToShortDateString().ToString(),
+                Ramki = Int32.Parse(t_ramki.Text),
+                WagaNetto = netto,
+                WagaBrutto = brutto,
+                Uwagi = t_uwagi.Text
+            };
+
+            _zapytania.DodajMiodobranie(miodobranie);
             this.Close();
         }
     }

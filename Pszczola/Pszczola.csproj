@@ -119,6 +119,7 @@
       <DependentUpon>FormMiodobranie.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Miodobranie.cs" />
+    <Compile Include="Model\Notatka.cs" />
     <Compile Include="Model\OpcjeStat.cs" />
     <Compile Include="Model\Polaczenie.cs" />
     <Compile Include="Model\Zapytania.cs" />
