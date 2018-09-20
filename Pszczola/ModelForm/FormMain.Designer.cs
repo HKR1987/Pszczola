@@ -1,6 +1,6 @@
 ﻿namespace Pszczola
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -48,7 +48,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.t_dodajNot = new System.Windows.Forms.TextBox();
             this.b_dodajNotatke = new System.Windows.Forms.Button();
-            this.b_miodobrania = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -248,17 +247,6 @@
             this.b_dodajNotatke.UseVisualStyleBackColor = true;
             this.b_dodajNotatke.Click += new System.EventHandler(this.B_dodajNotatke_Click);
             // 
-            // b_miodobrania
-            // 
-            this.b_miodobrania.Location = new System.Drawing.Point(364, 335);
-            this.b_miodobrania.Name = "b_miodobrania";
-            this.b_miodobrania.Size = new System.Drawing.Size(75, 23);
-            this.b_miodobrania.TabIndex = 14;
-            this.b_miodobrania.Tag = "kontrolki";
-            this.b_miodobrania.Text = "Miodobrania";
-            this.b_miodobrania.UseVisualStyleBackColor = true;
-            this.b_miodobrania.Click += new System.EventHandler(this.B_miodobrania_Click);
-            // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
@@ -292,7 +280,7 @@
             // 
             // b_stat
             // 
-            this.b_stat.Location = new System.Drawing.Point(283, 335);
+            this.b_stat.Location = new System.Drawing.Point(364, 334);
             this.b_stat.Name = "b_stat";
             this.b_stat.Size = new System.Drawing.Size(75, 23);
             this.b_stat.TabIndex = 19;
@@ -313,7 +301,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.b_miodobrania);
             this.Controls.Add(this.b_notatki);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.t_nowy);
@@ -359,7 +346,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox t_dodajNot;
         private System.Windows.Forms.Button b_dodajNotatke;
-        private System.Windows.Forms.Button b_miodobrania;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;

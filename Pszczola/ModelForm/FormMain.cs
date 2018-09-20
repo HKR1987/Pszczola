@@ -4,10 +4,11 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
 using Pszczola.Model;
+using Pszczola.ModelForm;
 
 namespace Pszczola
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
 
         protected DataSet Ds { get; set; }
@@ -19,7 +20,7 @@ namespace Pszczola
         private Polaczenie _polaczenie = new Polaczenie();
         private Zapytania _zapytania = new Zapytania();
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
             if (!File.Exists("baza.sqlite"))
@@ -233,8 +234,8 @@ namespace Pszczola
 
         private void B_stat_Click(object sender, EventArgs e)
         {
-            FormStat f = new FormStat();
-            f.ShowDialog();
+            FormStatWybor form = new FormStatWybor(Ul.IdUla, Ul.Rok);
+            form.ShowDialog();
         }
     }
 }

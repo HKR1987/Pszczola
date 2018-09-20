@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pszczola
 {
-    enum OpcjeStat
+    public enum OpcjeStat
     {
         Ogolem = 1,
         CalyRok,
