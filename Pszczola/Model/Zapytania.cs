@@ -34,7 +34,7 @@ namespace Pszczola.Model
 
         public Ul PobierzUl(int ulId)
         {
-            _ds = _polaczenie.ZapytanieDataSet($"SELECT id, nazwa, pochodzeniem, oznaczeniem, rok, wagaramki FROM Ul where id={ulId}");
+            _ds = _polaczenie.ZapytanieDataSet($"SELECT id, nazwa, pochodzeniem, oznaczeniem FROM Ul where id={ulId}");
             foreach (DataRow s in _ds.Tables[0].Rows)
             {
                 _ul = new Ul
@@ -43,7 +43,6 @@ namespace Pszczola.Model
                     Nazwa = s["nazwa"].ToString(),
                     PochodzenieMatki = s["pochodzeniem"].ToString(),
                     OznaczenieMatki = s["oznaczeniem"].ToString(),
-                    Rok = Int32.Parse(s["rok"].ToString()),
                 };
             }
             return _ul;
@@ -51,7 +50,7 @@ namespace Pszczola.Model
 
         public DataSet PobierzListeUli(string rok)
         {
-           return _polaczenie.ZapytanieDataSet("SELECT id, nazwa FROM Ul where rok=" + rok);
+           return _polaczenie.ZapytanieDataSet("SELECT id, nazwa FROM Ul");
         }
 
         public DataSet PobierzNotatki(int idUla, int rok)
@@ -61,12 +60,12 @@ namespace Pszczola.Model
 
         public DataSet PobierzMiodobrania(int idUla, int rok)
         {
-            return _polaczenie.ZapytanieDataSet($"SELECT idul, rok, data, nazwa, ramki, wagan, wagab, uwagi FROM miodobrania where idul={idUla} and rok={rok} ORDER BY data DESC");
+            return _polaczenie.ZapytanieDataSet($"SELECT idul, rok, data, ramki, wagan, wagab, uwagi FROM miodobrania where idul={idUla} and rok={rok} ORDER BY data DESC");
         }
 
         public void DodajUl(string nazwa, string rok)
         {
-            _polaczenie.ZapytanieVoid($"insert into Ul (nazwa, rok) values ('{nazwa}', '" + rok + "')");
+            _polaczenie.ZapytanieVoid($"insert into Ul (nazwa) values ('{nazwa}')");
         }
 
         public void AktualizujUl(Ul ul)
@@ -81,7 +80,7 @@ namespace Pszczola.Model
 
         public void UtworzTabele()
         {
-            _polaczenie.ZapytanieVoid("create table if not exists Ul (id integer PRIMARY KEY AUTOINCREMENT, nazwa VARCHAR(255) NOT NULL, pochodzeniem VARCHAR(255), oznaczeniem VARCHAR(255), wagaramki DOUBLE DEFAULT 0, rok integer)");
+            _polaczenie.ZapytanieVoid("create table if not exists Ul (id integer PRIMARY KEY AUTOINCREMENT, nazwa VARCHAR(255) NOT NULL, pochodzeniem VARCHAR(255), oznaczeniem VARCHAR(255))");
             _polaczenie.ZapytanieVoid("create table if not exists historia (id integer PRIMARY KEY AUTOINCREMENT, idul integer, gdzie VARCHAR(255), zmianaz VARCHAR(255), zmianana VARCHAR(255), rok integer, data TIMESTAMP DEFAULT (datetime('now','localtime')))");
             _polaczenie.ZapytanieVoid("create table if not exists notatki (id integer PRIMARY KEY AUTOINCREMENT, idul integer, opis VARCHAR(255), rok integer, data TIMESTAMP DEFAULT (datetime('now','localtime')))");
             _polaczenie.ZapytanieVoid("create table if not exists miodobrania (id integer PRIMARY KEY AUTOINCREMENT, idul integer, rok integer, data VARCHAR(255), ramki integer, wagan DOUBLE DEFAULT 0, wagab DOUBLE DEFAULT 0, uwagi VARCHAR(255))");

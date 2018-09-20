@@ -45,19 +45,19 @@ namespace Pszczola
         {
             if(opcje == OpcjeStat.Ogolem)
             {
-                return $"SELECT data, sum(wagab) sum FROM miodobrania group by data";
+                return $"SELECT data, sum(wagan) sum FROM miodobrania group by data";
             }
             else if (opcje == OpcjeStat.CalyRok)
             {
-                return $"SELECT data, sum(wagab) sum FROM miodobrania where rok={_rok} group by data";
+                return $"SELECT data, sum(wagan) sum FROM miodobrania where rok={_rok} group by data";
             }
             else if (opcje == OpcjeStat.CalyUl)
             {
-                return $"SELECT data, sum(wagab) sum FROM miodobrania where idul={_idUla} group by data";
+                return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} group by data";
             }
             else
             {
-                return $"SELECT data, sum(wagab) sum FROM miodobrania where idul={_idUla} and rok={_rok} group by data";
+                return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} and rok={_rok} group by data";
             }
         }
     }

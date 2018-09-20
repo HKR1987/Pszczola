@@ -30,6 +30,7 @@ namespace Pszczola
             
             OdswiezListe();
             KontrolkiHide();
+            Rok = Convert.ToInt32(comboBox1.Text);
         }
 
         private void KontrolkiHide()
@@ -136,7 +137,7 @@ namespace Pszczola
         private void OdswiezNotatki()
         {
             listBox1.Items.Clear();
-            Ds = _zapytania.PobierzNotatki(Ul.IdUla, Ul.Rok);
+            Ds = _zapytania.PobierzNotatki(Ul.IdUla, Rok);
 
             foreach (DataRow s in Ds.Tables[0].Rows)
             {
@@ -147,29 +148,32 @@ namespace Pszczola
         private void OdswiezMiodobrania()
         {
             listBox2.Items.Clear();
-            Ds = _zapytania.PobierzMiodobrania(Ul.IdUla, Ul.Rok);
-
+            Ds = _zapytania.PobierzMiodobrania(Ul.IdUla, Rok);
             foreach (DataRow s in Ds.Tables[0].Rows)
             {
-                listBox2.Items.Add("[" + s["data"].ToString() + "] " + s["nazwa"].ToString() + ": Waga netto: " + s["wagan"].ToString() + ": Waga brutto: " + s["wagab"].ToString() + ", Ramki: " + s["ramki"].ToString() + ", Uwagi: " + s["uwagi"].ToString());
+                listBox2.Items.Add("[" + s["data"].ToString() + "]: Waga netto: " 
+                                    + s["wagan"].ToString() + ": Waga brutto: " + s["wagab"].ToString() + ", Ramki: " 
+                                    + s["ramki"].ToString() + ", Uwagi: " + s["uwagi"].ToString());
             }
+            
+            
         }
 
         private void B_zapisz_Click(object sender, EventArgs e)
         {
             if (Ul.OznaczenieMatki != t_oznaczM.Text)
             {
-                _zapytania.DodajHistorie("Oznaczenie Matki", Ul.IdUla, Ul.OznaczenieMatki, t_oznaczM.Text, Ul.Rok);
+                _zapytania.DodajHistorie("Oznaczenie Matki", Ul.IdUla, Ul.OznaczenieMatki, t_oznaczM.Text, Rok);
             }
 
             if (Ul.PochodzenieMatki != t_pochM.Text)
             {
-                _zapytania.DodajHistorie("Pochodzenie Matki", Ul.IdUla, Ul.PochodzenieMatki, t_pochM.Text, Ul.Rok);
+                _zapytania.DodajHistorie("Pochodzenie Matki", Ul.IdUla, Ul.PochodzenieMatki, t_pochM.Text, Rok);
             }
 
             if (Ul.Nazwa != t_nazwa.Text)
             {
-                _zapytania.DodajHistorie("Nazwa ula", Ul.IdUla, Ul.Nazwa, t_nazwa.Text, Ul.Rok);
+                _zapytania.DodajHistorie("Nazwa ula", Ul.IdUla, Ul.Nazwa, t_nazwa.Text, Rok);
             }
 
             var nowyUl = new Ul
@@ -194,6 +198,7 @@ namespace Pszczola
 
         private void ComboBox1_TextChanged(object sender, EventArgs e)
         {
+            Rok = Convert.ToInt32(comboBox1.Text);
             dataGridView1.DataSource = null;
             KontrolkiHide();
             OdswiezListe();
@@ -201,7 +206,7 @@ namespace Pszczola
 
         private void B_dodajNotatke_Click(object sender, EventArgs e)
         {
-            _zapytania.DodajNotatke(t_dodajNot.Text, Ul.IdUla, Ul.Rok);
+            _zapytania.DodajNotatke(t_dodajNot.Text, Ul.IdUla, Rok);
             t_dodajNot.Text = "";
             OdswiezNotatki();
             OdswiezMiodobrania();
@@ -227,14 +232,14 @@ namespace Pszczola
 
         private void Button1_Click_2(object sender, EventArgs e)
         {
-            FormMiodobranie f = new FormMiodobranie(Ul.IdUla, Ul.Rok);
+            FormMiodobranie f = new FormMiodobranie(Ul.IdUla, Rok);
             f.ShowDialog();
             OdswiezMiodobrania();
         }
 
         private void B_stat_Click(object sender, EventArgs e)
         {
-            FormStatWybor form = new FormStatWybor(Ul.IdUla, Ul.Rok);
+            FormStatWybor form = new FormStatWybor(Ul.IdUla, Rok);
             form.ShowDialog();
         }
     }
