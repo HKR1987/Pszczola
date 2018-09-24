@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.b_dodaj = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.t_nazwa = new System.Windows.Forms.TextBox();
@@ -44,7 +44,6 @@
             this.t_nowy = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.b_notatki = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.t_dodajNot = new System.Windows.Forms.TextBox();
             this.b_dodajNotatke = new System.Windows.Forms.Button();
@@ -52,6 +51,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.b_stat = new System.Windows.Forms.Button();
+            this.l_notatek = new System.Windows.Forms.ListView();
+            this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Opis = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,9 +72,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.MenuText;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.MenuText;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(15, 39);
@@ -209,15 +211,6 @@
             this.b_notatki.UseVisualStyleBackColor = true;
             this.b_notatki.Click += new System.EventHandler(this.B_notatki_Click);
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(260, 221);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(432, 82);
-            this.listBox1.TabIndex = 9;
-            this.listBox1.Tag = "kontrolki";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -289,18 +282,44 @@
             this.b_stat.UseVisualStyleBackColor = true;
             this.b_stat.Click += new System.EventHandler(this.B_stat_Click);
             // 
-            // Form1
+            // l_notatek
+            // 
+            this.l_notatek.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Data,
+            this.Opis});
+            this.l_notatek.GridLines = true;
+            this.l_notatek.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.l_notatek.Location = new System.Drawing.Point(260, 221);
+            this.l_notatek.Name = "l_notatek";
+            this.l_notatek.Size = new System.Drawing.Size(432, 80);
+            this.l_notatek.TabIndex = 20;
+            this.l_notatek.Tag = "kontrolki";
+            this.l_notatek.UseCompatibleStateImageBehavior = false;
+            this.l_notatek.View = System.Windows.Forms.View.Details;
+            // 
+            // Data
+            // 
+            this.Data.Tag = "";
+            this.Data.Text = "Data";
+            this.Data.Width = 115;
+            // 
+            // Opis
+            // 
+            this.Opis.Text = "Opis";
+            this.Opis.Width = 300;
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 370);
+            this.ClientSize = new System.Drawing.Size(703, 370);
+            this.Controls.Add(this.l_notatek);
             this.Controls.Add(this.b_stat);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.b_dodajNotatke);
             this.Controls.Add(this.t_dodajNot);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.b_notatki);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.t_nowy);
@@ -317,7 +336,7 @@
             this.Controls.Add(this.t_nazwa);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.b_dodaj);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "Pszczoła";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -342,7 +361,6 @@
         private System.Windows.Forms.TextBox t_nowy;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button b_notatki;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox t_dodajNot;
         private System.Windows.Forms.Button b_dodajNotatke;
@@ -350,6 +368,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button b_stat;
+        private System.Windows.Forms.ListView l_notatek;
+        private System.Windows.Forms.ColumnHeader Data;
+        private System.Windows.Forms.ColumnHeader Opis;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.IO;
 using Pszczola.Model;
 using Pszczola.ModelForm;
+using System.Collections.Generic;
 
 namespace Pszczola
 {
@@ -74,19 +75,18 @@ namespace Pszczola
                 dataGridView1.Rows[Index].Selected = true;
             }
 
-            Ds = _zapytania.PobierzListeUli(comboBox1.Text);
-
             try
             {
-                dataGridView1.DataSource = Ds.Tables[0];
+                dataGridView1.DataSource = _zapytania.PobierzListeUli(comboBox1.Text);
                 dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[2].Visible = false;
+                dataGridView1.Columns[3].Visible = false;
 
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     dataGridView1.ClearSelection();
                     dataGridView1.Rows[Index].Selected = true;
                 }
-
             }
             catch (System.IndexOutOfRangeException)
             {
@@ -136,12 +136,11 @@ namespace Pszczola
 
         private void OdswiezNotatki()
         {
-            listBox1.Items.Clear();
-            Ds = _zapytania.PobierzNotatki(Ul.IdUla, Rok);
-
-            foreach (DataRow s in Ds.Tables[0].Rows)
+            l_notatek.Items.Clear();
+            List<Notatka> listaNotatek = _zapytania.PobierzNotatki(Ul.IdUla, Rok);
+            foreach (Notatka notatka in listaNotatek)
             {
-                listBox1.Items.Add("[" + s["data"].ToString() + "] " + s["opis"].ToString());
+                l_notatek.Items.Add(new ListViewItem(new string[] {notatka.DataCzas, notatka.Opis}));
             }
         }
 

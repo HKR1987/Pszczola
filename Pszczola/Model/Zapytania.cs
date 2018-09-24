@@ -10,22 +10,25 @@ namespace Pszczola.Model
         private Polaczenie _polaczenie = new Polaczenie();
         private HistUl _hist;
         private Ul _ul;
+        private Notatka _notatka;
+        List<Ul> _listaUli;
+        List<Notatka> _listaNotatek;
 
         public List<HistUl> PobierzHistorie(int ulId, int rok)
         {
             _ds = _polaczenie.ZapytanieDataSet($"SELECT id, gdzie, zmianaz, zmianana, data FROM historia where idul={ulId} and rok={rok}");
             List<HistUl> listHist = new List<HistUl>();
-            foreach (DataRow s in _ds.Tables[0].Rows)
+            foreach (DataRow row in _ds.Tables[0].Rows)
             {
                 _hist = new HistUl
                 {
-                    Id = Int32.Parse(s["id"].ToString()),
+                    Id = Int32.Parse(row["id"].ToString()),
                     IdUla = ulId,
                     Rok = rok,
-                    Gdzie = s["gdzie"].ToString(),
-                    ZmianaZ = s["zmianaz"].ToString(),
-                    ZmianaNa = s["zmianana"].ToString(),
-                    Czas = s["data"].ToString()
+                    Gdzie = row["gdzie"].ToString(),
+                    ZmianaZ = row["zmianaz"].ToString(),
+                    ZmianaNa = row["zmianana"].ToString(),
+                    Czas = row["data"].ToString()
                 };
                 listHist.Add(_hist);
             }
@@ -35,27 +38,49 @@ namespace Pszczola.Model
         public Ul PobierzUl(int ulId)
         {
             _ds = _polaczenie.ZapytanieDataSet($"SELECT id, nazwa, pochodzeniem, oznaczeniem FROM Ul where id={ulId}");
-            foreach (DataRow s in _ds.Tables[0].Rows)
+            foreach (DataRow row in _ds.Tables[0].Rows)
             {
                 _ul = new Ul
                 {
-                    IdUla = Int32.Parse(s["id"].ToString()),
-                    Nazwa = s["nazwa"].ToString(),
-                    PochodzenieMatki = s["pochodzeniem"].ToString(),
-                    OznaczenieMatki = s["oznaczeniem"].ToString(),
+                    IdUla = Int32.Parse(row["id"].ToString()),
+                    Nazwa = row["nazwa"].ToString(),
+                    PochodzenieMatki = row["pochodzeniem"].ToString(),
+                    OznaczenieMatki = row["oznaczeniem"].ToString(),
                 };
             }
             return _ul;
         }
 
-        public DataSet PobierzListeUli(string rok)
+        public List<Ul> PobierzListeUli(string rok)
         {
-           return _polaczenie.ZapytanieDataSet("SELECT id, nazwa FROM Ul");
+            _listaUli = new List<Ul>();
+            _ds = _polaczenie.ZapytanieDataSet("SELECT id, nazwa FROM Ul");
+            foreach (DataRow row in _ds.Tables[0].Rows)
+            {
+                _ul = new Ul
+                {
+                    IdUla = Int32.Parse(row["id"].ToString()),
+                    Nazwa = row["nazwa"].ToString()
+                };
+                _listaUli.Add(_ul);
+            }
+            return _listaUli;
         }
 
-        public DataSet PobierzNotatki(int idUla, int rok)
+        public List<Notatka> PobierzNotatki(int idUla, int rok)
         {
-            return _polaczenie.ZapytanieDataSet($"SELECT opis, data FROM notatki where idul={idUla} and rok={rok} ORDER BY data DESC LIMIT 5");
+            _listaNotatek = new List<Notatka>();
+            _ds = _polaczenie.ZapytanieDataSet($"SELECT opis, data FROM notatki where idul={idUla} and rok={rok} ORDER BY data DESC LIMIT 5");
+            foreach (DataRow row in _ds.Tables[0].Rows)
+            {
+                _notatka = new Notatka
+                {
+                    Opis = row["opis"].ToString(),
+                    DataCzas = row["data"].ToString()
+                };
+                _listaNotatek.Add(_notatka);
+            }
+            return _listaNotatek;
         }
 
         public DataSet PobierzMiodobrania(int idUla, int rok)
