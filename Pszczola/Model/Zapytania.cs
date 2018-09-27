@@ -102,7 +102,7 @@ namespace Pszczola.Model
                     Uwagi = row["uwagi"].ToString(),
 
                 };
-                _listaNotatek.Add(_notatka);
+                _listaMiodobran.Add(_miodobranie);
             }
             return _listaMiodobran;
         }

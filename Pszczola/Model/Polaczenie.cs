@@ -39,7 +39,7 @@ namespace Pszczola.Model
                 SQLiteCommand command = new SQLiteCommand(zapytanie, _dbConnection);
                 da.Fill(ds);
             }
-            catch (System.Data.SQLite.SQLiteException e)
+            catch (SQLiteException e)
             {
                 if(e.ErrorCode==1)
                 {
