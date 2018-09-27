@@ -26,6 +26,7 @@ namespace Pszczola.ModelForm
         private OpcjeStat Opcje()
         {
             RadioButton radioBtn = this.Controls.OfType<RadioButton>().Where(x => x.Checked).FirstOrDefault();
+            if (radioBtn == null) { return OpcjeStat.UlWRoku; }
             switch (radioBtn.Name)
             {
                 case "radio_ogolna":
