@@ -1,4 +1,4 @@
-﻿namespace Pszczola
+﻿namespace Pszczola.Model
 {
     public class Ul
     {

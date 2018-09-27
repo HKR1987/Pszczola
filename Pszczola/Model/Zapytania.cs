@@ -6,6 +6,7 @@ namespace Pszczola.Model
 {
     class Zapytania
     {
+        private List<Miodobranie> _listaMiodobran;
         private DataSet _ds;
         private Polaczenie _polaczenie = new Polaczenie();
         private HistUl _hist;
@@ -13,6 +14,7 @@ namespace Pszczola.Model
         private Notatka _notatka;
         List<Ul> _listaUli;
         List<Notatka> _listaNotatek;
+        private Miodobranie _miodobranie;
 
         public List<HistUl> PobierzHistorie(int ulId, int rok)
         {
@@ -70,7 +72,7 @@ namespace Pszczola.Model
         public List<Notatka> PobierzNotatki(int idUla, int rok)
         {
             _listaNotatek = new List<Notatka>();
-            _ds = _polaczenie.ZapytanieDataSet($"SELECT opis, data FROM notatki where idul={idUla} and rok={rok} ORDER BY data DESC LIMIT 5");
+            _ds = _polaczenie.ZapytanieDataSet($"SELECT opis, data FROM notatki where idul={idUla} and rok={rok} ORDER BY data DESC");
             foreach (DataRow row in _ds.Tables[0].Rows)
             {
                 _notatka = new Notatka
@@ -83,9 +85,26 @@ namespace Pszczola.Model
             return _listaNotatek;
         }
 
-        public DataSet PobierzMiodobrania(int idUla, int rok)
+        public List<Miodobranie> PobierzMiodobrania(int idUla, int rok)
         {
-            return _polaczenie.ZapytanieDataSet($"SELECT idul, rok, data, ramki, wagan, wagab, uwagi FROM miodobrania where idul={idUla} and rok={rok} ORDER BY data DESC");
+            _listaMiodobran = new List<Miodobranie>();
+            _ds = _polaczenie.ZapytanieDataSet($"SELECT idul, rok, data, ramki, wagan, wagab, uwagi FROM miodobrania where idul={idUla} and rok={rok} ORDER BY data DESC");
+            foreach (DataRow row in _ds.Tables[0].Rows)
+            {
+                _miodobranie = new Miodobranie
+                {       
+                    IdUl = Int32.Parse(row["idul"].ToString()),
+                    Rok = Int32.Parse(row["rok"].ToString()),
+                    Data = row["data"].ToString(),
+                    Ramki = Int32.Parse(row["ramki"].ToString()),
+                    WagaNetto = Double.Parse(row["wagan"].ToString()),
+                    WagaBrutto = Double.Parse(row["wagab"].ToString()),
+                    Uwagi = row["uwagi"].ToString(),
+
+                };
+                _listaNotatek.Add(_notatka);
+            }
+            return _listaMiodobran;
         }
 
         public void DodajUl(string nazwa, string rok)

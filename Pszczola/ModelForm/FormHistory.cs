@@ -1,12 +1,6 @@
 ﻿using Pszczola.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pszczola
@@ -14,7 +8,6 @@ namespace Pszczola
     public partial class FormHistory : Form
     {
         private Zapytania _zapytania = new Zapytania();
-        private List<HistUl> _histUl;
 
         public FormHistory()
         {
@@ -24,14 +17,19 @@ namespace Pszczola
         public FormHistory(int ulid, int rok)
         {
             InitializeComponent();
-           _histUl = _zapytania.PobierzHistorie(ulid, rok);
-            foreach(HistUl s in _histUl)
+            var listaHistorii = _zapytania.PobierzHistorie(ulid, rok);
+            UzupelnijHistorie(listaHistorii);
+        }
+
+        private void UzupelnijHistorie(List<HistUl> listaHistorii)
+        {
+            foreach (HistUl s in listaHistorii)
             {
-                listBox1.Items.Add("[" + s.Gdzie + "] " + "Zmiana z: " + s.ZmianaZ +" na: " + s.ZmianaNa + "  (" + s.Czas+")");
+                lb_historia.Items.Add($"[{s.Gdzie}] Zmiana z: {s.ZmianaZ} na: {s.ZmianaNa}  ({s.Czas})");
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void B_zamknij_Click(object sender, EventArgs e)
         {
             this.Close();
         }

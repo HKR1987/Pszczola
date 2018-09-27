@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.b_dodaj = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.b_dodajUl = new System.Windows.Forms.Button();
+            this.dgv_listaUli = new System.Windows.Forms.DataGridView();
             this.t_nazwa = new System.Windows.Forms.TextBox();
             this.t_oznaczM = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_rok = new System.Windows.Forms.ComboBox();
             this.l_rok = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,42 +49,45 @@
             this.b_dodajNotatke = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.b_dodajMiodobranie = new System.Windows.Forms.Button();
             this.b_stat = new System.Windows.Forms.Button();
             this.l_notatek = new System.Windows.Forms.ListView();
             this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Opis = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_listaUli)).BeginInit();
             this.SuspendLayout();
             // 
-            // b_dodaj
+            // b_dodajUl
             // 
-            this.b_dodaj.Location = new System.Drawing.Point(202, 335);
-            this.b_dodaj.Name = "b_dodaj";
-            this.b_dodaj.Size = new System.Drawing.Size(46, 23);
-            this.b_dodaj.TabIndex = 13;
-            this.b_dodaj.Text = "Dodaj";
-            this.b_dodaj.UseVisualStyleBackColor = true;
-            this.b_dodaj.Click += new System.EventHandler(this.Button1_Click);
+            this.b_dodajUl.Location = new System.Drawing.Point(202, 335);
+            this.b_dodajUl.Name = "b_dodajUl";
+            this.b_dodajUl.Size = new System.Drawing.Size(46, 23);
+            this.b_dodajUl.TabIndex = 13;
+            this.b_dodajUl.Text = "Dodaj";
+            this.b_dodajUl.UseVisualStyleBackColor = true;
+            this.b_dodajUl.Click += new System.EventHandler(this.B_dodajUl_Click);
             // 
-            // dataGridView1
+            // dgv_listaUli
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.MenuText;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(233, 290);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Click += new System.EventHandler(this.DataGridView1_Click);
+            this.dgv_listaUli.AllowUserToAddRows = false;
+            this.dgv_listaUli.AllowUserToDeleteRows = false;
+            this.dgv_listaUli.AllowUserToOrderColumns = true;
+            this.dgv_listaUli.AllowUserToResizeColumns = false;
+            this.dgv_listaUli.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.MenuText;
+            this.dgv_listaUli.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_listaUli.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_listaUli.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_listaUli.Location = new System.Drawing.Point(15, 39);
+            this.dgv_listaUli.MultiSelect = false;
+            this.dgv_listaUli.Name = "dgv_listaUli";
+            this.dgv_listaUli.ReadOnly = true;
+            this.dgv_listaUli.RowHeadersVisible = false;
+            this.dgv_listaUli.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_listaUli.Size = new System.Drawing.Size(233, 290);
+            this.dgv_listaUli.TabIndex = 1;
+            this.dgv_listaUli.Click += new System.EventHandler(this.Dgv_listaUli_Click);
             // 
             // t_nazwa
             // 
@@ -112,18 +115,18 @@
             this.label1.Tag = "kontrolki";
             this.label1.Text = "Oznaczenie matki\r\n(barwa znaczka / rok)\r\n";
             // 
-            // comboBox1
+            // cb_rok
             // 
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cb_rok.Items.AddRange(new object[] {
             "2017",
             "2018",
             "2019"});
-            this.comboBox1.Location = new System.Drawing.Point(45, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.Text = "2018";
-            this.comboBox1.TextChanged += new System.EventHandler(this.ComboBox1_TextChanged);
+            this.cb_rok.Location = new System.Drawing.Point(45, 12);
+            this.cb_rok.Name = "cb_rok";
+            this.cb_rok.Size = new System.Drawing.Size(121, 21);
+            this.cb_rok.TabIndex = 2;
+            this.cb_rok.Text = "2018";
+            this.cb_rok.TextChanged += new System.EventHandler(this.Cb_rok_TextChanged);
             // 
             // l_rok
             // 
@@ -260,16 +263,16 @@
             this.label6.Tag = "kontrolki";
             this.label6.Text = "Miodobrania";
             // 
-            // button1
+            // b_dodajMiodobranie
             // 
-            this.button1.Location = new System.Drawing.Point(526, 91);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 108);
-            this.button1.TabIndex = 8;
-            this.button1.Tag = "kontrolki";
-            this.button1.Text = "Dodaj miodobranie";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click_2);
+            this.b_dodajMiodobranie.Location = new System.Drawing.Point(526, 91);
+            this.b_dodajMiodobranie.Name = "b_dodajMiodobranie";
+            this.b_dodajMiodobranie.Size = new System.Drawing.Size(76, 108);
+            this.b_dodajMiodobranie.TabIndex = 8;
+            this.b_dodajMiodobranie.Tag = "kontrolki";
+            this.b_dodajMiodobranie.Text = "Dodaj miodobranie";
+            this.b_dodajMiodobranie.UseVisualStyleBackColor = true;
+            this.b_dodajMiodobranie.Click += new System.EventHandler(this.B_DodajMiodobranie_Click);
             // 
             // b_stat
             // 
@@ -315,7 +318,7 @@
             this.ClientSize = new System.Drawing.Size(703, 370);
             this.Controls.Add(this.l_notatek);
             this.Controls.Add(this.b_stat);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.b_dodajMiodobranie);
             this.Controls.Add(this.b_dodajNotatke);
             this.Controls.Add(this.t_dodajNot);
             this.Controls.Add(this.label5);
@@ -330,15 +333,15 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.l_rok);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cb_rok);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.t_oznaczM);
             this.Controls.Add(this.t_nazwa);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.b_dodaj);
+            this.Controls.Add(this.dgv_listaUli);
+            this.Controls.Add(this.b_dodajUl);
             this.Name = "FormMain";
             this.Text = "Pszczoła";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_listaUli)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,8 +349,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button b_dodaj;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button b_dodajUl;
+        private System.Windows.Forms.DataGridView dgv_listaUli;
         private System.Windows.Forms.TextBox t_nazwa;
         private System.Windows.Forms.TextBox t_oznaczM;
         private System.Windows.Forms.Label label1;
@@ -357,7 +360,7 @@
         private System.Windows.Forms.TextBox t_pochM;
         private System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_historia;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_rok;
         private System.Windows.Forms.TextBox t_nowy;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button b_notatki;
@@ -366,7 +369,7 @@
         private System.Windows.Forms.Button b_dodajNotatke;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button b_dodajMiodobranie;
         private System.Windows.Forms.Button b_stat;
         private System.Windows.Forms.ListView l_notatek;
         private System.Windows.Forms.ColumnHeader Data;

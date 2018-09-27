@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Pszczola.Model;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pszczola
@@ -25,9 +19,9 @@ namespace Pszczola
 
         private void PokazStatystyki()
         {
-            foreach (DataRow s in _ds.Tables[0].Rows)
+            foreach (DataRow r in _ds.Tables[0].Rows)
             {
-                chart1.Series["Miód"].Points.AddXY(s["data"].ToString(), s["sum"].ToString());
+                chart1.Series["Miód"].Points.AddXY(r["data"].ToString(), r["sum"].ToString());
             }
         }
 
@@ -43,21 +37,18 @@ namespace Pszczola
 
         private string Zapytanie(OpcjeStat opcje)
         {
-            if(opcje == OpcjeStat.Ogolem)
+            switch (opcje)
             {
-                return $"SELECT data, sum(wagan) sum FROM miodobrania group by data";
-            }
-            else if (opcje == OpcjeStat.CalyRok)
-            {
-                return $"SELECT data, sum(wagan) sum FROM miodobrania where rok={_rok} group by data";
-            }
-            else if (opcje == OpcjeStat.CalyUl)
-            {
-                return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} group by data";
-            }
-            else
-            {
-                return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} and rok={_rok} group by data";
+                case OpcjeStat.Ogolem:
+                    return $"SELECT data, sum(wagan) sum FROM miodobrania group by data";
+                case OpcjeStat.CalyRok:
+                    return $"SELECT data, sum(wagan) sum FROM miodobrania where rok={_rok} group by data";
+                case OpcjeStat.CalyUl:
+                    return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} group by data";
+                case OpcjeStat.UlWRoku:
+                    return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} and rok={_rok} group by data";
+                default:
+                    return $"SELECT data, sum(wagan) sum FROM miodobrania where idul={_idUla} and rok={_rok} group by data";
             }
         }
     }

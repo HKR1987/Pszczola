@@ -1,24 +1,18 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using Pszczola.Model;
+using Pszczola.ModelForm;
+using System;
 using System.Data.SQLite;
 using System.IO;
-using Pszczola.Model;
-using Pszczola.ModelForm;
-using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Pszczola
 {
     public partial class FormMain : Form
     {
-
-        protected DataSet Ds { get; set; }
         protected Ul Ul { get; set; }
         protected int Index { get; set; }
         protected int Ulid { get; set; }
         protected int Rok { get; set; }
-
-        private Polaczenie _polaczenie = new Polaczenie();
         private Zapytania _zapytania = new Zapytania();
 
         public FormMain()
@@ -29,9 +23,9 @@ namespace Pszczola
                 SQLiteConnection.CreateFile("baza.sqlite");
             }
             
-            OdswiezListe();
+            OdswiezListeUli();
             KontrolkiHide();
-            Rok = Convert.ToInt32(comboBox1.Text);
+            Rok = Convert.ToInt32(cb_rok.Text);
         }
 
         private void KontrolkiHide()
@@ -58,53 +52,52 @@ namespace Pszczola
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void B_dodajUl_Click(object sender, EventArgs e)
         {
-            _zapytania.DodajUl(t_nowy.Text, comboBox1.Text);
-            OdswiezListe();
+            _zapytania.DodajUl(t_nowy.Text, cb_rok.Text);
+            OdswiezListeUli();
         }
 
-
-        private void OdswiezListe()
+        private void OdswiezListeUli()
         {
             Index = 0;
 
-            if (dataGridView1.DataSource != null & dataGridView1.SelectedRows.Count > 0)
+            if (dgv_listaUli.DataSource != null & dgv_listaUli.SelectedRows.Count > 0)
             { 
-                Index = dataGridView1.SelectedRows[0].Index;
-                dataGridView1.Rows[Index].Selected = true;
+                Index = dgv_listaUli.SelectedRows[0].Index;
+                dgv_listaUli.Rows[Index].Selected = true;
             }
 
             try
             {
-                dataGridView1.DataSource = _zapytania.PobierzListeUli(comboBox1.Text);
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[2].Visible = false;
-                dataGridView1.Columns[3].Visible = false;
+                dgv_listaUli.DataSource = _zapytania.PobierzListeUli(cb_rok.Text);
+                dgv_listaUli.Columns[0].Visible = false;
+                dgv_listaUli.Columns[2].Visible = false;
+                dgv_listaUli.Columns[3].Visible = false;
 
-                if (dataGridView1.SelectedRows.Count > 0)
+                if (dgv_listaUli.SelectedRows.Count > 0)
                 {
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Rows[Index].Selected = true;
+                    dgv_listaUli.ClearSelection();
+                    dgv_listaUli.Rows[Index].Selected = true;
                 }
             }
             catch (System.IndexOutOfRangeException)
             {
                 MessageBox.Show("Brak tabel. Zostaną one utworzone");
                 _zapytania.UtworzTabele();
-                OdswiezListe();
+                OdswiezListeUli();
             }
         }
 
-        private void DataGridView1_Click(object sender, EventArgs e)
+        private void Dgv_listaUli_Click(object sender, EventArgs e)
         {
             
             try
             {
-                SprawdzenieZmian();
-                Ulid = Int32.Parse(dataGridView1.SelectedCells[0].Value.ToString());
+                SprawdzCzySaZmiany();
+                Ulid = Int32.Parse(dgv_listaUli.SelectedCells[0].Value.ToString());
                 Ul = _zapytania.PobierzUl(Ulid);
-                GenerujDane(Ul, Ulid);
+                PokazDane(Ul, Ulid);
                 KontrolkiShow();
             }
             catch (ArgumentOutOfRangeException)
@@ -113,7 +106,7 @@ namespace Pszczola
             }
         }
 
-        private void SprawdzenieZmian()
+        private void SprawdzCzySaZmiany()
         {
             if(Ul!=null && (t_nazwa.Text!=Ul.Nazwa || t_oznaczM.Text!=Ul.OznaczenieMatki || t_pochM.Text!=Ul.PochodzenieMatki))
             {
@@ -125,7 +118,7 @@ namespace Pszczola
             }
         }
 
-        private void GenerujDane(Ul u, int id)
+        private void PokazDane(Ul u, int id)
         {
             t_nazwa.Text = u.Nazwa;
             t_pochM.Text = u.PochodzenieMatki;
@@ -137,28 +130,46 @@ namespace Pszczola
         private void OdswiezNotatki()
         {
             l_notatek.Items.Clear();
-            List<Notatka> listaNotatek = _zapytania.PobierzNotatki(Ul.IdUla, Rok);
+            var listaNotatek = _zapytania.PobierzNotatki(Ul.IdUla, Rok);
             foreach (Notatka notatka in listaNotatek)
             {
                 l_notatek.Items.Add(new ListViewItem(new string[] {notatka.DataCzas, notatka.Opis}));
+                if (l_notatek.Items.Count == 3)
+                {
+                    break;
+                }
             }
         }
 
         private void OdswiezMiodobrania()
         {
             listBox2.Items.Clear();
-            Ds = _zapytania.PobierzMiodobrania(Ul.IdUla, Rok);
-            foreach (DataRow s in Ds.Tables[0].Rows)
+            var listaMiodobran = _zapytania.PobierzMiodobrania(Ul.IdUla, Rok);
+            foreach (Miodobranie miodobranie in listaMiodobran)
             {
-                listBox2.Items.Add("[" + s["data"].ToString() + "]: Waga netto: " 
-                                    + s["wagan"].ToString() + ": Waga brutto: " + s["wagab"].ToString() + ", Ramki: " 
-                                    + s["ramki"].ToString() + ", Uwagi: " + s["uwagi"].ToString());
+                listBox2.Items.Add($"[{miodobranie.Data}]: Waga netto: {miodobranie.WagaNetto}, " +
+                        $"Waga brutto: {miodobranie.WagaBrutto}, Ramki: {miodobranie.Ramki}, Uwagi: {miodobranie.Uwagi}");
             }
-            
-            
         }
 
         private void B_zapisz_Click(object sender, EventArgs e)
+        {
+            DodajHistorieZmian();
+
+            var nowyUl = new Ul
+            {
+                IdUla = Ul.IdUla,
+                Nazwa = t_nazwa.Text,
+                PochodzenieMatki = t_pochM.Text,
+                OznaczenieMatki = t_oznaczM.Text,
+            };
+
+            _zapytania.AktualizujUl(nowyUl);
+            Ul = _zapytania.PobierzUl(Ulid);
+            OdswiezListeUli();
+        }
+
+        private void DodajHistorieZmian()
         {
             if (Ul.OznaczenieMatki != t_oznaczM.Text)
             {
@@ -174,33 +185,20 @@ namespace Pszczola
             {
                 _zapytania.DodajHistorie("Nazwa ula", Ul.IdUla, Ul.Nazwa, t_nazwa.Text, Rok);
             }
-
-            var nowyUl = new Ul
-            {
-                IdUla = Ul.IdUla,
-                Nazwa = t_nazwa.Text,
-                PochodzenieMatki = t_pochM.Text,
-                OznaczenieMatki = t_oznaczM.Text,
-            };
-
-            _zapytania.AktualizujUl(nowyUl);
-            Ul = _zapytania.PobierzUl(Ulid);
-            OdswiezListe();
         }
 
         private void B_historia_Click(object sender, EventArgs e)
         {
-            Rok = Convert.ToInt32(comboBox1.Text);
             FormHistory hist = new FormHistory(Ulid, Rok);
             hist.ShowDialog();            
         }
 
-        private void ComboBox1_TextChanged(object sender, EventArgs e)
+        private void Cb_rok_TextChanged(object sender, EventArgs e)
         {
-            Rok = Convert.ToInt32(comboBox1.Text);
-            dataGridView1.DataSource = null;
+            Rok = Convert.ToInt32(cb_rok.Text);
+            dgv_listaUli.DataSource = null;
             KontrolkiHide();
-            OdswiezListe();
+            OdswiezListeUli();
         }
 
         private void B_dodajNotatke_Click(object sender, EventArgs e)
@@ -208,31 +206,18 @@ namespace Pszczola
             _zapytania.DodajNotatke(t_dodajNot.Text, Ul.IdUla, Rok);
             t_dodajNot.Text = "";
             OdswiezNotatki();
-            OdswiezMiodobrania();
         }
 
         private void B_notatki_Click(object sender, EventArgs e)
         {
-            Rok = Convert.ToInt32(comboBox1.Text);
-            FormNotes hist = new FormNotes(Ulid, Rok);
-            hist.ShowDialog();
+            FormNotes notatki = new FormNotes(Ulid, Rok);
+            notatki.ShowDialog();
         }
 
-        private void Button1_Click_1(object sender, EventArgs e)
+        private void B_DodajMiodobranie_Click(object sender, EventArgs e)
         {
-            FormMiodobranie f = new FormMiodobranie();
-            f.ShowDialog();
-        }
-
-        private void B_miodobrania_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Button1_Click_2(object sender, EventArgs e)
-        {
-            FormMiodobranie f = new FormMiodobranie(Ul.IdUla, Rok);
-            f.ShowDialog();
+            FormMiodobranie form = new FormMiodobranie(Ul.IdUla, Rok);
+            form.ShowDialog();
             OdswiezMiodobrania();
         }
 

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using Pszczola.Model;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pszczola.ModelForm
@@ -30,21 +25,19 @@ namespace Pszczola.ModelForm
 
         private OpcjeStat Opcje()
         {
-            if(radio_ogolna.Checked)
+            RadioButton radioBtn = this.Controls.OfType<RadioButton>().Where(x => x.Checked).FirstOrDefault();
+            switch (radioBtn.Name)
             {
-                return OpcjeStat.Ogolem;
-            }
-            else if(radio_ogolnaRok.Checked)
-            {
-                return OpcjeStat.CalyRok;
-            }
-            else if(radio_ul.Checked)
-            {
-                return OpcjeStat.CalyUl;
-            }
-            else
-            {
-                return OpcjeStat.UlWRoku;
+                case "radio_ogolna":
+                    return OpcjeStat.Ogolem;
+                case "radio_ogolnaRok":
+                    return OpcjeStat.CalyRok;
+                case "radio_ul":
+                    return OpcjeStat.CalyUl;
+                case "radio_ulRok":
+                    return OpcjeStat.UlWRoku;
+                default:
+                    return OpcjeStat.UlWRoku;
             }
         }
     }
