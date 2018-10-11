@@ -61,7 +61,7 @@ namespace Pszczola.Model
 
         public DataSet PobierzMiodobrania(int idUla, int rok)
         {
-            return _polaczenie.ZapytanieDataSet($"SELECT idul, rok, data, ramki, wagan, wagab, uwagi FROM miodobrania where idul={idUla} and rok={rok} ORDER BY data DESC");
+            return _polaczenie.ZapytanieDataSet($"SELECT idul, rok, data, nazwa, ramki, wagan, wagab, uwagi FROM miodobrania where idul={idUla} and rok={rok} ORDER BY data DESC");
         }
 
         public void DodajUl(string nazwa, string rok)
