@@ -1,12 +1,5 @@
 ﻿using Pszczola.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pszczola
@@ -29,7 +22,7 @@ namespace Pszczola
             _rok = rok;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void B_dodaj_Click(object sender, EventArgs e)
         {
             var brutto = Double.Parse(t_wagaRazem.Text);
             var tara = Double.Parse(t_wagaTara.Text);

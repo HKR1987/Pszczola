@@ -36,7 +36,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.t_ramki = new System.Windows.Forms.TextBox();
             this.t_wagaRazem = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.b_Dodaj = new System.Windows.Forms.Button();
             this.t_uwagi = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -108,13 +108,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(14, 195);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(206, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Dodaj";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.b_Dodaj.Location = new System.Drawing.Point(14, 195);
+            this.b_Dodaj.Name = "button1";
+            this.b_Dodaj.Size = new System.Drawing.Size(206, 23);
+            this.b_Dodaj.TabIndex = 6;
+            this.b_Dodaj.Text = "Dodaj";
+            this.b_Dodaj.UseVisualStyleBackColor = true;
+            this.b_Dodaj.Click += new System.EventHandler(this.B_dodaj_Click);
             // 
             // t_uwagi
             // 
@@ -139,7 +139,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(232, 227);
             this.Controls.Add(this.t_uwagi);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.b_Dodaj);
             this.Controls.Add(this.t_wagaRazem);
             this.Controls.Add(this.t_ramki);
             this.Controls.Add(this.t_wagaTara);
@@ -166,7 +166,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox t_ramki;
         private System.Windows.Forms.TextBox t_wagaRazem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button b_Dodaj;
         private System.Windows.Forms.RichTextBox t_uwagi;
         private System.Windows.Forms.Label label5;
     }

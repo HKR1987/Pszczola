@@ -1,19 +1,15 @@
-﻿using System;
+﻿using Pszczola.Model;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pszczola
 {
     public partial class FormNotes : Form
     {
-        private DataSet ds;
-        Polaczenie polaczenie = new Polaczenie();
+        private Polaczenie _polaczenie = new Polaczenie();
+        private Zapytania _zapytania = new Zapytania();
+
         public FormNotes()
         {
             InitializeComponent();
@@ -22,14 +18,19 @@ namespace Pszczola
         public FormNotes(int ulid, int rok)
         {
             InitializeComponent();
-            ds = polaczenie.ZapytanieDataSet($"SELECT opis, data FROM notatki where idul={ulid} and rok={rok}");
-            foreach(DataRow s in ds.Tables[0].Rows)
+            var listaNotatek = _zapytania.PobierzNotatki(ulid, rok);
+            UzupelnijNotatki(listaNotatek);
+        }
+
+        private void UzupelnijNotatki(List<Notatka> listaNotatek)
+        {
+            foreach (Notatka n in listaNotatek)
             {
-                listBox1.Items.Add("[" + s["data"].ToString() + "] " + s["opis"].ToString());
+                lb_lista.Items.Add($"[{n.DataCzas}] {n.Opis}");
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void B_zamknij_Click(object sender, EventArgs e)
         {
             this.Close();
         }

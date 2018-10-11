@@ -38,6 +38,14 @@
             // 
             // chart1
             // 
+            chartArea1.Area3DStyle.Inclination = 20;
+            chartArea1.Area3DStyle.PointDepth = 20;
+            chartArea1.Area3DStyle.WallWidth = 20;
+            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.True;
+            chartArea1.AxisY.LabelStyle.Format = "{0} KG";
+            chartArea1.AxisY.MinorGrid.Enabled = true;
+            chartArea1.AxisY.MinorTickMark.Enabled = true;
+            chartArea1.AxisY2.Title = "dgfd";
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -45,10 +53,9 @@
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
             series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Miód";
             this.chart1.Series.Add(series1);
@@ -66,6 +73,7 @@
             this.ClientSize = new System.Drawing.Size(540, 365);
             this.Controls.Add(this.chart1);
             this.Name = "FormStat";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormStat";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);

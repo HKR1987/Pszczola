@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pszczola
+﻿namespace Pszczola.Model
 {
-    enum OpcjeStat
+    public enum OpcjeStat
     {
         Ogolem = 1,
         CalyRok,

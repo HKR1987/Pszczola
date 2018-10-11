@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-namespace Pszczola
+namespace Pszczola.Model
 {
     public class Polaczenie
     {
@@ -39,7 +39,7 @@ namespace Pszczola
                 SQLiteCommand command = new SQLiteCommand(zapytanie, _dbConnection);
                 da.Fill(ds);
             }
-            catch (System.Data.SQLite.SQLiteException e)
+            catch (SQLiteException e)
             {
                 if(e.ErrorCode==1)
                 {
