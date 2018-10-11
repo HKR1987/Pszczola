@@ -147,7 +147,6 @@ namespace Pszczola
         {
             listBox2.Items.Clear();
             Ds = _zapytania.PobierzMiodobrania(Ul.IdUla, Ul.Rok);
-
             foreach (DataRow s in Ds.Tables[0].Rows)
             {
                 listBox2.Items.Add("[" + s["data"].ToString() + "] " + s["nazwa"].ToString() + ": Waga netto: " + s["wagan"].ToString() + ": Waga brutto: " + s["wagab"].ToString() + ", Ramki: " + s["ramki"].ToString() + ", Uwagi: " + s["uwagi"].ToString());
